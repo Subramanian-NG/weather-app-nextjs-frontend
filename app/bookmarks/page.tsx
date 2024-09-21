@@ -54,6 +54,11 @@ export default function Page() {
           const data = await fetchWeather(cityName, countryCode);
           return {  city,data};
         } catch (err) {
+          if (err instanceof Error) {
+            setError(err.message);
+          } else {
+            setError('An unknown error occurred.');
+          }
           return { city,data: null};
         }
       });

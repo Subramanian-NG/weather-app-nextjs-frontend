@@ -43,7 +43,11 @@ export default function Page() {
       setUserId(data.userId);
       localStorage.setItem('userId', data.userId);
     } catch (err) {
-      setError('Failed to retrieve user ID');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred.');
+      }
     }
   };
 
@@ -95,7 +99,11 @@ export default function Page() {
       //alert("Logged out successfully!");
       router.push('/login');
     } catch (err) {
-      setError('Error occurred on logout');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Error occured in logout');
+      }
     }
   };
 
