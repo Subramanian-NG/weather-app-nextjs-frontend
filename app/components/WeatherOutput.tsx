@@ -20,6 +20,8 @@ export default function WeatherOutput({ weather, userId, showBookmarkButton = tr
 
   useEffect(() => {
     const fetchBookmarkedCities = async () => {
+      if (showBookmarkButton)
+      {
       const authToken = localStorage.getItem('authToken');
       try {
         const response = await fetch(`${backendUrl}/api/actions/bookmarks/${userId}`, {
@@ -34,11 +36,10 @@ export default function WeatherOutput({ weather, userId, showBookmarkButton = tr
       } finally {
         setLoading(false);
       }
+    }
     };
 
-    if (showBookmarkButton) {
-      fetchBookmarkedCities();
-    }
+    fetchBookmarkedCities();
   }, [city, userId, showBookmarkButton]);
 
   const handleBookmark = async () => {

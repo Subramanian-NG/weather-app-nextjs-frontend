@@ -1,6 +1,6 @@
 'use server'
  
-export async function fetchWeather(city: any, countryCode: any) {
+export async function fetchWeather(city: string, countryCode: string) {
   const apiKey = process.env.API_KEY;
   const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}&units=metric`,{next: { revalidate: 0 }});
   if (!res.ok) {
