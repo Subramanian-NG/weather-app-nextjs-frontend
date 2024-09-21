@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 interface WeatherOutputProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   weather: any;
   userId: string;
   showBookmarkButton?: boolean;  // New optional prop to toggle the bookmark button

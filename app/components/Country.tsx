@@ -7,6 +7,7 @@ interface CountryProps {
 }
 
 export default function Country({ setCountryCode }: CountryProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [countries, setCountries] = useState<any[]>([]);
 
   useEffect(() => {
