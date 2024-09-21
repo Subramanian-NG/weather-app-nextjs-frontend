@@ -67,10 +67,10 @@ export default function Page() {
       const results = await Promise.all(weatherPromises);
 
       //console.log("bookmark results--", results);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const weatherMap = results.reduce((acc, { city, data }) => {
         acc[`${city}`] = data;
         return acc;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       }, {} as { [key: string]: any });
       
       setWeatherData(weatherMap);
