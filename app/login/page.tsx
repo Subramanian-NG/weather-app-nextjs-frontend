@@ -102,7 +102,7 @@ export default function Page() {
           
         <a href="/" className="text-blue-500 hover:underline">Home</a>
         </div>
-        <h2 className="text-2xl font-bold mb-6">Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-900">Login</h2>
 
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
