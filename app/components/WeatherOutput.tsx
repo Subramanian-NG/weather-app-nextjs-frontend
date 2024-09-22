@@ -20,10 +20,6 @@ export default function WeatherOutput({ weather, userId, showBookmarkButton = tr
   const city = `${weatherObj.name},${weatherObj.sys.country}`;
 
   const fetchBookmarkedCities = async () => {
-    // if (!showBookmarkButton) {
-    //   setLoading(false); 
-    //   return;
-    // }
     const authToken = localStorage.getItem('authToken');
     try {
       const response = await fetch(`${backendUrl}/api/actions/bookmarks/${userId}`, {
