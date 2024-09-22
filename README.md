@@ -1,6 +1,6 @@
 Next JS App using Open Weather API to fetch weather information
 
-App URL - https://weather-app-nextjs-frontend-eqpsixwtl-subramanian-n-gs-projects.vercel.app
+App URL - https://weather-app-nextjs-frontend.vercel.app/
 
 APIs used  
 
