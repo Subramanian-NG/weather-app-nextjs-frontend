@@ -12,14 +12,19 @@ export default function WeatherOutput({ weather, userId, showBookmarkButton = tr
   const [loading, setLoading] = useState(true);
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-  if (!weather) {
-    return <div className="text-center text-red-500">Weather Information not available.</div>;
-  }
 
   const weatherObj = weather;
   const city = `${weatherObj.name},${weatherObj.sys.country}`;
 
+
+  useEffect(() => {
   const fetchBookmarkedCities = async () => {
+
+    if (!showBookmarkButton) {
+      setLoading(false); 
+      return;
+    }
+
     const authToken = localStorage.getItem('authToken');
     try {
       const response = await fetch(`${backendUrl}/api/actions/bookmarks/${userId}`, {
@@ -36,8 +41,6 @@ export default function WeatherOutput({ weather, userId, showBookmarkButton = tr
     }
   };
 
-
-useEffect(() => {
   fetchBookmarkedCities();
 }, [city, userId, showBookmarkButton]);
 
@@ -57,6 +60,10 @@ useEffect(() => {
       console.error('Error bookmarking the city:', error);
     }
   };
+
+  if (!weather) {
+    return <div className="text-center text-red-500">Weather Information not available.</div>;
+  }
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md mt-4">
