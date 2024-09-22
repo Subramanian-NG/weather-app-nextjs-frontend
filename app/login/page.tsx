@@ -41,7 +41,14 @@ export default function Page() {
       );
 
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message || 'Registration failed');
+      if (!response.ok) 
+      {
+        let errorMessage = data.message;
+        if (data.errors && data.errors instanceof Array) {
+          errorMessage = data.errors[0].msg;
+        }
+        throw new Error(errorMessage || 'Registration failed');
+      }
 
       setSuccess('User registered successfully');
       setEmail('');
@@ -77,9 +84,13 @@ export default function Page() {
       );
 
       const data = await response.json();
+
+      let errorMessage = data.message;
+      if (data.errors && data.errors instanceof Array) {
+        errorMessage = data.errors[0].msg;
+      }
       
-      
-      if (!response.ok) throw new Error(data.message || 'Login failed');
+      if (!response.ok) throw new Error(errorMessage || 'Login failed');
 
       localStorage.setItem('userEmail', email);
       localStorage.setItem('authToken', data.token);
