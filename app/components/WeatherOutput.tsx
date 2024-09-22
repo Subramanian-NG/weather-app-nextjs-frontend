@@ -19,33 +19,31 @@ export default function WeatherOutput({ weather, userId, showBookmarkButton = tr
   const weatherObj = weather;
   const city = `${weatherObj.name},${weatherObj.sys.country}`;
 
-  useEffect(() => {
-    const fetchBookmarkedCities = async () => {
-      if (!showBookmarkButton) {
-        setLoading(false); // Set loading to false if not fetching
-        return;
-      }
-      const authToken = localStorage.getItem('authToken');
-      try {
-        const response = await fetch(`${backendUrl}/api/actions/bookmarks/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
-        const bookmarkedCities = await response.json();
-        setIsBookmarked(bookmarkedCities.includes(city));
-      } catch (error) {
-        console.error('Error fetching bookmarks:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBookmarkedCities();
-  }, [city, userId, showBookmarkButton]);
+  const fetchBookmarkedCities = async () => {
+    if (!showBookmarkButton) {
+      setLoading(false); 
+      return;
+    }
+    const authToken = localStorage.getItem('authToken');
+    try {
+      const response = await fetch(`${backendUrl}/api/actions/bookmarks/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      const bookmarkedCities = await response.json();
+      setIsBookmarked(bookmarkedCities.includes(city));
+    } catch (error) {
+      console.error('Error fetching bookmarks:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
-  
+useEffect(() => {
+  fetchBookmarkedCities();
+}, [city, userId, showBookmarkButton]);
 
   const handleBookmark = async () => {
     const authToken = localStorage.getItem('authToken');
