@@ -13,14 +13,14 @@ export default function Page() {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-  const userId  = localStorage.getItem('userId');
-  const authToken = localStorage.getItem('authToken');
 
   //console.log("userId--",userId);
   //console.log("authToken--",authToken);
 
   useEffect(() => {
     const fetchBookmarks = async () => {
+      const userId  = localStorage.getItem('userId');
+      const authToken = localStorage.getItem('authToken');
       try {
         const response = await fetch(`${backendUrl}/api/actions/bookmarks/${userId}`, {
           headers: {
@@ -83,6 +83,8 @@ export default function Page() {
 
  
   const handleRemoveBookmark = async (city: string) => {
+    const userId  = localStorage.getItem('userId');
+    const authToken = localStorage.getItem('authToken');
       try {
         const response = await fetch(`${backendUrl}/api/actions/bookmark`, {
           method: 'DELETE',
@@ -147,7 +149,7 @@ export default function Page() {
                 </div>
                 {selectedCity === `${city}` && weatherData[`${city}`] && (
                   <div className="mt-4 ">
-                    <WeatherOutput weather={weatherData[`${city}`]} userId={String(userId)} showBookmarkButton={false} />
+                    <WeatherOutput weather={weatherData[`${city}`]} userId={String(localStorage.getItem('userId'))} showBookmarkButton={false} />
                   </div>
                 )}
               </li>
