@@ -63,6 +63,7 @@ export default function Page() {
       setError('');
     } catch (err) {
       if (err instanceof Error) {
+        console.error('Error fetching weather data111:', err.message);
         setError(err.message);
       } else {
         setError('An unknown error occurred.');
