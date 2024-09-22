@@ -120,9 +120,9 @@ export default function Page() {
       Check Weather
     </Link>
   </div>
-  {error && <p className="text-red-500">{error}</p>}
+  {error && <p className="text-red-500 text-gray-900">{error}</p>}
   {bookmarks.length === 0 ? (
-    <p>No bookmarked cities.</p>
+    <p className='text-gray-900'>No bookmarked cities.</p>
   ) : (
     
     <><p className="text-lg font-bold text-blue-700 mb-4">Click a city to view more details about its weather.</p><ul>
