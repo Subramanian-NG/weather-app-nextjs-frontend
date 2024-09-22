@@ -49,7 +49,7 @@ export default function Page() {
     const fetchWeatherForBookmarks = async () => {
       const weatherPromises = bookmarks.map(async (city) => {
         const [cityName, countryCode] = city.split(',');
-        const result = await fetchWeather(city, countryCode);
+        const result = await fetchWeather(cityName, countryCode);
         if (result.error) {
           setError(result.error);  
           return { city,data: null};
