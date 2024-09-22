@@ -5,14 +5,11 @@ export async function fetchWeather(city: string, countryCode: string) {
   const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}&units=metric`,{next: { revalidate: 0 }});
   if (!res.ok) {
     const respJson = await res.json();
-    console.error('fetch weather response:', respJson);
-    if(respJson.message)
-    throw new Error(respJson.message);
-    else
-    throw new Error('Weather data not found');
+    console.error('Error fetching weather data:', respJson);
+    return { error: respJson.message || 'Weather data not found' };
   }
-  return res.json();
-
+  const data = await res.json();
+  return { data };
 }
 
 export async function fetchCountries() {

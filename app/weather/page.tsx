@@ -56,20 +56,13 @@ export default function Page() {
       setError('City field empty');
       return;
     }
-
-    try {
-      const weatherData = await fetchWeather(city, countryCode);
-      setWeather(weatherData);
-      setError('');
-    } catch (err) {
-      console.error('err:', err);
-      if (err instanceof Error) {
-        console.error('err message:', err.message);
-        setError(err.message);
-      } else {
-        setError('An unknown error occurred.');
-      }
+    const result = await fetchWeather(city, countryCode);
+    if (result.error) {
+      setError(result.error);  
       setWeather(null);
+    } else {
+      setWeather(result.data);  
+      setError('');
     }
   };
 
