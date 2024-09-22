@@ -48,19 +48,15 @@ export default function Page() {
   useEffect(() => {
     const fetchWeatherForBookmarks = async () => {
       const weatherPromises = bookmarks.map(async (city) => {
-        try {
-          //console.log("city--",city);
-          //console.log("city type--",typeof city);
-          const [cityName, countryCode] = city.split(',');
-          const data = await fetchWeather(cityName, countryCode);
-          return {  city,data};
-        } catch (err) {
-          if (err instanceof Error) {
-            setError(err.message);
-          } else {
-            setError('An unknown error occurred.');
-          }
+        const [cityName, countryCode] = city.split(',');
+        const result = await fetchWeather(city, countryCode);
+        if (result.error) {
+          setError(result.error);  
           return { city,data: null};
+        } else {
+          const data = result.data;
+          return { city,data};  
+          setError('');
         }
       });
 
@@ -134,10 +130,10 @@ export default function Page() {
               <li key={city}  className="flex flex-col space-y-2 mb-4 p-4 bg-gray-100 rounded-lg shadow-md cursor-pointer hover:bg-gray-200 transition-colors duration-200"
 >
                 <div className="flex justify-between items-center cursor-pointer" onClick={() => handleCityClick(city)}>
-                  <span>
+                  <span className="text-gray-900">
                     {city}
                   </span>
-                  <span className="ml-4">
+                  <span className="ml-4 text-gray-900">
                     {weatherData[`${city}`]?.main?.temp} °C
                   </span>
                   <button
