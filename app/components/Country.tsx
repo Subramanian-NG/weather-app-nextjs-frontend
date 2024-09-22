@@ -28,7 +28,7 @@ export default function Country({ setCountryCode }: CountryProps) {
       <select
         defaultValue=""
         onChange={(e) => setCountryCode(e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200"
+        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 text-gray-900"
       >
         <option value="">
           Select Country
