@@ -108,7 +108,7 @@ export default function Page() {
       <div className="absolute top-4 right-4 flex items-center space-x-2">
       {userEmail ? (
         <>
-          <h2>Welcome, {userEmail}</h2>
+          <h2 className='text-gray-900'>Welcome, {userEmail}</h2>
           <button
             onClick={handleLogout}
             className="bg-red-500 text-white hover:bg-red-600 px-4 py-2 rounded-lg font-semibold shadow-md transition-colors duration-300"
